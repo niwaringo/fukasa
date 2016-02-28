@@ -1,4 +1,4 @@
-import FukasaCore from "./fukasacore";
+const FukasaCore = require("./fukasacore");
 
 const fc = new FukasaCore;
 

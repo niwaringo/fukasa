@@ -1,7 +1,7 @@
-import { EventEmitter } from "events";
+const EventEmitter = require("events").EventEmitter;
 
 class FukasaCore extends EventEmitter {
 
 }
 
-export default FukasaCore;
+module.exports = FukasaCore;
