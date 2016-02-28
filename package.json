@@ -4,7 +4,8 @@
   "description": "vanilla js scroll library",
   "main": "lib/index.js",
   "scripts": {
-    "build": "browserify src/fukasa.js -o index.js",
+    "build": "browserify src/fukasa.js -o index.js -s fukasa",
+    "watch": "watchify src/fukasa.js -o index.js -s fukasa -v",
     "test": "karma start"
   },
   "repository": {
