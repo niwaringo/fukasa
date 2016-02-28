@@ -30,4 +30,5 @@ build/Release
 node_modules
 
 .idea
-lib
+*.iml
+index.js
