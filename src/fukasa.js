@@ -1,21 +1,16 @@
-const FukasaCore = require("./fukasacore");
+const EventEmitter = require("events").EventEmitter;
+const throttle = require("lodash/throttle");
 
-const fc = new FukasaCore;
+// const all_events = Object.keys(fc._events);
+// console.log(all_events);
 
-const fukasa = {
-    on(event, listener) {
-        fc.on(event, listener);
-    },
-
-    listen() {
-        // const all_events = Object.keys(fc._events);
-        // console.log(all_events);
-
-        window.addEventListener("scroll", () => {
+class Fukasa extends EventEmitter {
+    bindScroll() {
+        window.addEventListener("scroll", throttle(() => {
             const pageyoffset = window.pageYOffset;
             console.log(pageyoffset);
-        });
+        }, 500));
     }
-};
+}
 
-module.exports = fukasa;
+module.exports = new Fukasa();
