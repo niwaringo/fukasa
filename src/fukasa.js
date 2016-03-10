@@ -1,31 +1,38 @@
-const throttle = require("lodash/throttle");
+const throttle = require("lodash.throttle");
 const ukakko = require("ukakko");
 
 
-class Fukasa {
-    constructor() {
-        this._allEvents = [];
-        this.pageHeight = document.body.scrollHeight;
-    }
+let allEvents = [];
 
-    /**
-     * addEvent
-     * @param trigger {number}
-     * @param callback {function}
-     */
-    addEvent(trigger, callback) {
-        ukakko(() => {
-            let targetY = this.pageHeight * trigger;
-            targetY = (trigger !== 1) ? targetY : targetY - 5;
-
-            window.addEventListener("scroll", throttle(() => {
-                const distance = window.pageYOffset + window.innerHeight;
-                if (distance > targetY) {
-                    callback.call(this);
-                }
-            }, 500));
+function scrollFunc() {
+    return throttle(() => {
+        allEvents = allEvents.filter(event => {
+            const distance = window.pageYOffset + window.innerHeight;
+            if (distance >= event.targetY) {
+                event.callback();
+                return false;
+            }
+            return true;
         });
-    }
+    }, 500);
 }
 
-module.exports = new Fukasa();
+function bindScroll() {
+    window.addEventListener("scroll", scrollFunc());
+}
+
+function fukasa(trigger, callback) {
+    ukakko(() => {
+        const event = {};
+        const pageHeight = document.body.scrollHeight;
+        const targetHeight = pageHeight * trigger;
+        event.targetY = (trigger !== 1) ? targetHeight : targetHeight - 5;
+        event.callback = callback;
+        allEvents.push(event);
+        if (allEvents.length === 1) bindScroll();
+    });
+
+    return allEvents;
+}
+
+module.exports = fukasa;
