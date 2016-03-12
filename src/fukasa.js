@@ -7,16 +7,29 @@ class Fukasa {
         this._scrollFunc = this._createScrollFunc();
     }
 
-    on(trigger, callback) {
+    on(target, callback) {
         ukakko(() => {
             const event = {};
-            const pageHeight = document.body.scrollHeight;
-            const targetHeight = pageHeight * trigger;
-            event.targetY = (trigger !== 1) ? targetHeight : targetHeight - 5;
+            event.targetY = this._getTargetHeight(target);
             event.callback = callback;
             this._allEvents.push(event);
             if (this._allEvents.length === 1) this._bindScroll();
         });
+    }
+
+    _getTargetHeight(target) {
+        if (Object.prototype.toString.call(target) === "[object Number]") {
+            const pageHeight = document.body.scrollHeight;
+            const targetHeight = pageHeight * target;
+            console.log(pageHeight);
+            return (target !== 1) ? targetHeight : targetHeight - 5;
+        }
+
+        if (target instanceof HTMLElement) {
+            return target.offsetTop;
+        }
+
+        return 0;
     }
 
     _bindScroll() {

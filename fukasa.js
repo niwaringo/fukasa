@@ -18,18 +18,32 @@ var Fukasa = function () {
 
     _createClass(Fukasa, [{
         key: "on",
-        value: function on(trigger, callback) {
+        value: function on(target, callback) {
             var _this = this;
 
             ukakko(function () {
                 var event = {};
-                var pageHeight = document.body.scrollHeight;
-                var targetHeight = pageHeight * trigger;
-                event.targetY = trigger !== 1 ? targetHeight : targetHeight - 5;
+                event.targetY = _this._getTargetHeight(target);
                 event.callback = callback;
                 _this._allEvents.push(event);
                 if (_this._allEvents.length === 1) _this._bindScroll();
             });
+        }
+    }, {
+        key: "_getTargetHeight",
+        value: function _getTargetHeight(target) {
+            if (Object.prototype.toString.call(target) === "[object Number]") {
+                var pageHeight = document.body.scrollHeight;
+                var targetHeight = pageHeight * target;
+                console.log(pageHeight);
+                return target !== 1 ? targetHeight : targetHeight - 5;
+            }
+
+            if (target instanceof HTMLElement) {
+                return target.offsetTop;
+            }
+
+            return 0;
         }
     }, {
         key: "_bindScroll",

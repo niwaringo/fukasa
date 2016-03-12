@@ -3,12 +3,18 @@
     <title>fukasa exsample</title>
 </head>
 <body style="height: 5000px;">
+<div id="domtarget" style="margin-top: 3000px"></div>
 <script src="../fukasa.js"></script>
 <script>
     fukasa.on(0.5, function() {
         var dom = document.createElement("div");
         dom.id = "dom05";
         document.body.appendChild(dom);
+    });
+
+    var domtarget = document.getElementById("domtarget");
+    fukasa.on(domtarget, function() {
+        domtarget.innerHTML = "domtarget OK";
     });
 </script>
 </body>
