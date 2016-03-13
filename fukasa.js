@@ -23,6 +23,7 @@ var Fukasa = function () {
 
             ukakko(function () {
                 var event = {};
+                event.target = target;
                 event.targetY = _this._getTargetHeight(target);
                 event.callback = callback;
                 _this._allEvents.push(event);
@@ -35,7 +36,6 @@ var Fukasa = function () {
             if (Object.prototype.toString.call(target) === "[object Number]") {
                 var pageHeight = document.body.scrollHeight;
                 var targetHeight = pageHeight * target;
-                console.log(pageHeight);
                 return target !== 1 ? targetHeight : targetHeight - 5;
             }
 

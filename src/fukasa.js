@@ -10,6 +10,7 @@ class Fukasa {
     on(target, callback) {
         ukakko(() => {
             const event = {};
+            event.target = target;
             event.targetY = this._getTargetHeight(target);
             event.callback = callback;
             this._allEvents.push(event);
@@ -21,7 +22,6 @@ class Fukasa {
         if (Object.prototype.toString.call(target) === "[object Number]") {
             const pageHeight = document.body.scrollHeight;
             const targetHeight = pageHeight * target;
-            console.log(pageHeight);
             return (target !== 1) ? targetHeight : targetHeight - 5;
         }
 
