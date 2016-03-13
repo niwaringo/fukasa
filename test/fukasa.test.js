@@ -2,16 +2,29 @@
 
 const assert = require("assert");
 
-describe('app login flow', function() {
+describe("fukasa", function() {
     beforeEach(() => {
-       browser.url("/test/test.html");
+        browser.url("/test/test.html");
     });
-    
-    it('sets up initial variables', function() {
-        let check_dom = browser.isExisting("#dom05");
-        assert.strictEqual(check_dom, false);
-        browser.scroll(0, 2501);
-        check_dom = browser.isExisting("#dom05");
-        assert.strictEqual(check_dom, true);
+
+    afterEach(() => {
+        browser.scroll(0, 0);
+        browser.refresh();
     });
+
+    it("scroll percentage", function() {
+        const before_check_dom = browser.isExisting("#dom05");
+        assert.strictEqual(before_check_dom, false);
+        browser.scroll(0, 4005);
+        const after_check_dom = browser.isExisting("#dom05");
+        assert.strictEqual(after_check_dom, true);
+    });
+
+    it("scroll dom", function() {
+        const before_check_text = browser.getText("#domtarget");
+        assert.strictEqual(before_check_text, "");
+        browser.scroll("#domtarget");
+        const after_check_text = browser.getText("#domtarget");
+        assert.strictEqual(after_check_text, "domtarget OK");
+    })
 });
