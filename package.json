@@ -40,7 +40,6 @@
     "webdriverio": "^4.0.3"
   },
   "dependencies": {
-    "lodash.throttle": "^4.0.1",
     "ukakko": "^1.0.1"
   }
 }

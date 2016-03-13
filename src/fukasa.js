@@ -1,4 +1,4 @@
-const throttle = require("lodash.throttle");
+const throttle = require("./throttle");
 const ukakko = require("ukakko");
 
 class Fukasa {
