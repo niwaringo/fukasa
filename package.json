@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "vanilla js scroll library",
   "main": "lib/index.js",
+  "files": "lib",
   "scripts": {
     "babel": "babel src -d lib",
     "babel:watch": "babel src -d lib -w",
